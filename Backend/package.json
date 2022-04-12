@@ -1,0 +1,30 @@
+{
+  "name": "shorten-url",
+  "version": "1.0.0",
+  "description": "make long url into shortern one",
+  "main": "index.js",
+  "scripts": {
+    "test": "Jest",
+    "start": "nodemon ./index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Syed-Yarooq-Hussain/Virtual-Identity-coding-challenge.git"
+  },
+  "author": "syed yarooq hussain",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Syed-Yarooq-Hussain/Virtual-Identity-coding-challenge/issues"
+  },
+  "homepage": "https://github.com/Syed-Yarooq-Hussain/Virtual-Identity-coding-challenge#readme",
+  "dependencies": {
+    "body-parser": "^1.19.2",
+    "cors": "^2.8.5",
+    "express": "^4.17.3",
+    "jest": "^27.5.1",
+    "nodemon": "^2.0.15",
+    "pg": "^8.7.3",
+    "short-unique-id": "^4.4.4",
+    "supertest": "^6.2.2"
+  }
+}
