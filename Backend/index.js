@@ -18,6 +18,7 @@ app.options('*', cors());
 
 //Apis's
 app.get('/getAllMovieList', movieController.getAllMovieList);
+app.get('/movieDetail/:id', movieController.getMovieDetailById);
 app.post('/addMoviesByKey', movieController.addMoviesInDatabaseByTitle);
 
 

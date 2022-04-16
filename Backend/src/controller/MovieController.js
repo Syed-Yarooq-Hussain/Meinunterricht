@@ -1,17 +1,37 @@
 const db = require('../config/dbConfig')
-const { getMoviesByTitle, saveRecordInternally, checkIsInserted, updateInsertedHistory ,getAllMovieList } = require('../model/movie')
+const { getMoviesByTitle, saveRecordInternally, checkIsInserted, updateInsertedHistory ,getAllMovieList
+    , getMovieById, getMovieDetailById, updateInernalDataById } = require('../model/movie')
 const axios = require('axios')
 
 
 exports.getAllMovieList = async function (req, res) {
     try {
         let title = req.query.title ?? ''
-        let movies = await getAllMovieList(title)
+        let movies = await getAllMovieList(title);
+
 
         return res.status(200).json({ code: 200, data: movies.rows, message: 'Successfully get list of URLS' })
     } catch (e) {
+        return res.status(500).json({ code: 500, error: e, message: 'Server Error' })
+    }
+}
+
+exports.getMovieDetailById = async function (req, res) { 
+    try{
+        let id = req.params.id;
+        
+        let movie = await getMovieById(id);
+
+        if(!movie.rows[0].plot){
+            let imdpData = await  getMovieDetailById(movie.rows[0].imdbid)
+            movie = await updateInernalDataById(id, imdpData.Director, imdpData.Plot)
+        }
+
+        return res.status(200).json({ code: 200, data: movie.rows[0],  message: 'Successfully get list of URLS' })
+
+    }catch(e){
         console.log(e)
-        return res.status(400).json({ code: 400, error: e, message: 'something went wrong' })
+        return res.status(500).json({ code: 500, error: e, message: 'Server Error' })
     }
 }
 
