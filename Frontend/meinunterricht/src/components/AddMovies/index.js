@@ -1,24 +1,50 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styles from './addmovies.module.css'
 
 
 function AddMovies() {
-  const [q, setQ] = useState("");
-  const [num, setN] = useState("");
-  
-  
-  function onChange(event) {
-    setQ(event.target.value)
+  const [searchTitle, setTitle] = useState("");
+  const [year, setYear] = useState(2001);
 
+
+  function onChange(event) {
+    setTitle(event.target.value)
+  }
+  function onChangeYear(event) {
+    setYear(event.target.value)
+    console.log(year)
   }
 
   const handleSubmit = (event) => {
-    setN(num);
-    console.log(event.target.value)
+    if (year < 2001 || year > 2022) {
+      alert("invalid input ")
+    }
+    console.log(year)
 
     event.preventDefault();
+    fetch(`http://localhost:3001/addMoviesByKey`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        title: searchTitle,
+        year: year,
+      })
+    })
+      .then(res => res.json())
+      .then(
+        (result) => {
+          console.log(result)
+          window.location.href = 'http://localhost:3000';
+        },
+        (error) => {
+          console.log(error);
+        }
+      )
   }
-  
+
 
   return (
     <>
@@ -27,24 +53,27 @@ function AddMovies() {
           <div className="search-wrapper">
             <label htmlFor="search-form">
               Search movie of your choice
-              <input 
+              <input
                 className={styles.search_bar}
                 type="search"
                 name="search-form"
                 id="search-form"
                 placeholder="Search for..."
-                value={q}
+                value={searchTitle}
                 onChange={onChange}
               />
             </label>
             <label htmlFor="search-form">
               year
-              <input 
-                type="num"
-                name="num"
+              <input
+                type="yearber"
+                name="year"
                 id="year"
+                min={2001}
+                max={2022}
                 placeholder="year"
-                value={num}
+                value={year}
+                onChange={onChangeYear}
               />
             </label>
             <input className={styles.submit} type="submit" />
@@ -52,7 +81,7 @@ function AddMovies() {
         </div>
 
       </form>
-      
+
 
     </>
   );

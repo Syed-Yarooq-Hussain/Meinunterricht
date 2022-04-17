@@ -29,7 +29,6 @@ function MovieList(props) {
   }, [page])
 
   const getMovieList = (search) => {
-    //fetch(`http://www.omdbapi.com/?s=${search}&apikey=7b1d1da`)
     fetch(`http://localhost:3001/getAllMovieList?title=${search}`)
       .then(res => res.json())
       .then(
@@ -44,6 +43,7 @@ function MovieList(props) {
   }
   return (
     <>
+    {items && items.length > 0 &&
       <thead  >
         <tr>
           <th >
@@ -64,6 +64,7 @@ function MovieList(props) {
         </tr>
 
       </thead>
+      }
       {items && items.length > 0 && items.map(item => {
         return (
           <tr>
@@ -80,6 +81,11 @@ function MovieList(props) {
       {items && items.length > 0 &&
         <div className={styles.button_container}>
           <button onClick={() => handleChange('dec')}>{'<'}</button> <span className='px-4'>{page}</span> <button onClick={() => handleChange('inc')}>{'>'}</button>
+        </div>
+      }
+      {items && items.length== 0 &&
+        <div>
+          <p>Result not found</p>
         </div>
       }
     </>

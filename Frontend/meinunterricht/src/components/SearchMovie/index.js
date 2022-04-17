@@ -7,7 +7,7 @@ function SearchMovie() {
   return (
     <>
       <div>
-        <a href={`http://localhost:3000/add-movies`}>Search Not found ask us to bulk your search</a>
+        <a href={`http://localhost:3000/add-movies`}>If Search Not found ask us to bulk your search</a>
       </div>
       <SearchBar />
     </>
