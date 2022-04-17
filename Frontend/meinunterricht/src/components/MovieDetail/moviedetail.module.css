@@ -1,0 +1,19 @@
+.image_container{
+    background-color: black;
+    text-align: center;
+}
+
+
+.detail_container{
+    background-color: purple;
+    color : white;
+    justify-content: center;
+    text-align: center;
+}
+ul {
+    list-style-type: none;
+}
+
+li{
+    padding: 4px 0;
+}

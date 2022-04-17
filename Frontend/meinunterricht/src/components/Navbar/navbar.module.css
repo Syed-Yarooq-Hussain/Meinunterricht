@@ -1,0 +1,10 @@
+.container{
+    font-size: 24px;
+    background-color: purple;
+    color: white;
+    height: 64px;
+    text-align: center;    
+}
+p{
+    padding-top: 16px;
+}
